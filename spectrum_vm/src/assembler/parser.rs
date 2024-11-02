@@ -45,12 +45,8 @@ impl AssemblyInstruction {
                         TokenKind::IntegerOperand { value } => {
                             // can take up to 16 bits
                             let buffer: u16 =  *value as u16;
-                            // 11111111 11111111
-                            // byte_1 ^
-                            // byte_2 >> 8      ^
-                            let byte_1: u16 = buffer;                // 8 upper bits
-                            let byte_2: u16 = buffer >> 8;        // 8 lower bits
-                            // byte is MSB so we put it first to respect endianness eg.: 0x01 0x02 in bytecode:
+                            let byte_1: u16 = buffer;                
+                            let byte_2: u16 = buffer >> 8;        
                             instruction_as_bytes.push(byte_2 as u8);
                             instruction_as_bytes.push(byte_1 as u8);
                         }
